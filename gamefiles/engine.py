@@ -1,7 +1,10 @@
 import pygame
 import sys
+import random
 from gamefiles.objects.playerClass import Player
 from gamefiles.objects.laserClass import Laser
+from gamefiles.objects.enemyClass import Enemy
+#from gameFiles.objects.enemyLaserClass import EnemyLaser
 
 class Scene(object):
     
@@ -18,11 +21,16 @@ class Scene(object):
         self.clock = pygame.time.Clock()
         self.screen.blit(self.background, (0, 0))
         
-        # define sprites and sprites group
+        # define player sprites and player sprite groups
         self.laser = Laser()
         self.player = Player()
         self.playerGroup = pygame.sprite.Group(self.player)
         self.laserGroup = pygame.sprite.Group(self.laser)
+        # define enemy sprites and enemy sprite groups
+        #self.enemyLaser = EnemyLaser()
+        self.enemy = Enemy()
+        self.enemyGroup = pygame.sprite.Group(self.enemy)
+        #self.enemyLaserGroup = pygame.sprite.Group(self.enemyLaser)
         
     # starts the main loop
     def start(self):
@@ -58,12 +66,25 @@ class Scene(object):
             
     # updates objects
     def update(self):
+        # check if enemy is dead, and roll chance to spawn if so
+        if self.enemy.status == "Dead":
+            if random.randrange(0, 100) == 1:
+                self.enemy.spawn()
+                #self.enemyLaser.canShoot = True
+        # clear groups
         self.playerGroup.clear(self.screen, self.background)
         self.laserGroup.clear(self.screen, self.background)
+        self.enemyGroup.clear(self.screen, self.background)
+        #self.enemyLaserGroup.clear(self.screen, self.background)
+        # update groups
         self.playerGroup.update(self.screen)
         self.laserGroup.update(self.screen)
+        self.enemyGroup.update(self.screen)
+        #self.enemyLaserGroup.update(self.screen)
     
     # draws screen
     def draw(self):
         self.playerGroup.draw(self.screen)
         self.laserGroup.draw(self.screen)
+        self.enemyGroup.draw(self.screen)
+        #self.enemyLaserGroup.draw(self.screen)

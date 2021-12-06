@@ -4,16 +4,14 @@ import math
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        #self.imageThrust = pygame.image.load("sprites/shipThrust.png")
-        #self.imageThrust = self.imageThrust.convert()
-        self.imageCruise = pygame.image.load("assets/sprites/ships/ship-1.png")
+        self.imageThrust = pygame.image.load("assets/sprites/ships/ship-1/ship-thrust.png")
+        self.imageThrust = self.imageThrust.convert()
+        self.imageCruise = pygame.image.load("assets/sprites/ships/ship-1/ship-cruise.png")
         self.imageCruise = self.imageCruise.convert()
-        #self.imageLeft = pygame.image.load("sprites/shipLeft.png")
-        #self.imageLeft = self.imageLeft.convert()
-        #self.imageRight = pygame.image.load("sprites/shipRight.png")
-        #self.imageRight = self.imageRight.convert()
-        #self.imageFiring = self.image.load("assets/sprites/ships/ship-1/shipFiring.png")
-        #self.imageFiring = self.imageFiring.convert()
+        self.imageLeft = pygame.image.load("assets/sprites/ships/ship-1/ship-left.png")
+        self.imageLeft = self.imageLeft.convert()
+        self.imageRight = pygame.image.load("assets/sprites/ships/ship-1/ship-right.png")
+        self.imageRight = self.imageRight.convert()
         self.soundFiring = pygame.mixer.Sound("assets/sounds/effects/laser.mp3")
         self.soundFiring.set_volume(0.1)
         self.imageMaster = self.imageCruise
@@ -44,15 +42,15 @@ class Player(pygame.sprite.Sprite):
             self.direction -= self.turnRate
             if self.direction < 0:
                 self.direction = 360 - self.turnRate
-            #self.imageMaster = self.imageRight
+            self.imageMaster = self.imageRight
         if key[pygame.K_a]:
             self.direction += self.turnRate
             if self.direction > 360:
                 self.direction = self.turnRate
-            #self.imageMaster = self.imageLeft
+            self.imageMaster = self.imageLeft
         if key[pygame.K_w]:
             self.thrust = 0.10
-            #self.imageMaster = self.imageThrust
+            self.imageMaster = self.imageThrust
         else:
             self.thrust = 0
     
@@ -93,4 +91,3 @@ class Player(pygame.sprite.Sprite):
         laser.speed = self.charge
         laser.direction = self.direction
         self.soundFiring.play()
-        #self.imageMaster = self.imageFiring
