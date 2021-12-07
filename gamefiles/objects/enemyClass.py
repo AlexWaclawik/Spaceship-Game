@@ -44,7 +44,7 @@ class Enemy(pygame.sprite.Sprite):
         self.status = "Alive"
         # roll for random spawnpoint
         self.x = random.choice((0, 1200))
-        self.y = random.randint(0, 800)
+        self.y = random.randint(50, 750)
         # set movement to the right or left depending on spawn
         if self.x == 0:
             self.direction = 0

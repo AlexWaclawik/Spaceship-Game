@@ -4,7 +4,7 @@ import random
 from gamefiles.objects.playerClass import Player
 from gamefiles.objects.laserClass import Laser
 from gamefiles.objects.enemyClass import Enemy
-#from gamefiles.objects.enemyClass import EnemyLaser
+from gamefiles.objects.enemyLaserClass import EnemyLaser
 
 class Scene(object):
     
@@ -20,6 +20,7 @@ class Scene(object):
         self.background.fill((0, 0, 0))
         self.clock = pygame.time.Clock()
         self.screen.blit(self.background, (0, 0))
+        
         # define player sprites and player sprite groups
         self.laser = Laser()
         self.player = Player()
@@ -29,7 +30,7 @@ class Scene(object):
         self.enemyLaser = EnemyLaser()
         self.enemy = Enemy()
         self.enemyGroup = pygame.sprite.Group(self.enemy)
-        #self.enemyLaserGroup = pygame.sprite.Group(self.enemyLaser)
+        self.enemyLaserGroup = pygame.sprite.Group(self.enemyLaser)
         
     # starts the main loop
     def start(self):
@@ -47,7 +48,7 @@ class Scene(object):
         self.events()
         self.update()
         self.draw()
-        self.checkCollide()
+        #self.checkCollide()
         pygame.display.flip()
     
     # manages input events
@@ -76,36 +77,31 @@ class Scene(object):
         self.laserGroup.update(self.screen)
         # check if enemy is dead, and roll chance to spawn if so
         if self.enemy.status == "Dead":
-            if random.randrange(0, 300) == 1:
+            if random.randrange(0, 100) == 1:
                 self.enemy.spawn()
         else:
             self.enemyGroup.update(self.screen)
-            if 
-            #self.enemy.fireLaser(self.enemyLaser)
-            #self.enemyLaser.canShoot = False
-            #self.enemyLaserGroup.update(self.screen)
-    # fire enemy laser
-    '''def fireLaser(self):
-        # fire laser once per frame
-        if self.laserTimer == 0:
-            self.lasers.append(EnemyLaser(self.x, self.y, self.laserDirection))
-            self.laserTimer = 60
-        # otherwise count down laser timer by one
-        else:
-            self.laserTimer -= 1'''
+            if self.enemyLaser.timer == 0:
+                self.enemyLaser.firing.play()
+                self.enemyLaser.x = self.enemy.x
+                self.enemyLaser.y = self.enemy.y
+                self.enemyLaser.direction = self.enemy.laserDirection
+                self.enemyLaser.timer = 60
+            else:
+                self.enemyLaserGroup.update(self.screen)
     
     # draws screen
     def draw(self):
         self.playerGroup.draw(self.screen)
         self.laserGroup.draw(self.screen)
         self.enemyGroup.draw(self.screen)
-        #self.enemyLaserGroup.draw(self.screen)
+        self.enemyLaserGroup.draw(self.screen)
         
-    # check for sprite collosions
+    '''# check for sprite collosions
     def checkCollide(self):
         # check if player laser has hit enemy
         if (pygame.sprite.groupcollide(self.enemyGroup, self.laserGroup, True, False)):
             self.enemy.killSprite()
             #self.enemyLaser.reset()
         # check if enemy laser has hit player
-        #if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):
+        #if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):'''
