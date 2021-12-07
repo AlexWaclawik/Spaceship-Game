@@ -5,8 +5,9 @@ from gamefiles.objects.playerClass import Player
 from gamefiles.objects.laserClass import Laser
 from gamefiles.objects.enemyClass import Enemy
 from gamefiles.objects.enemyLaserClass import EnemyLaser
+from gamefiles.utilities.label import Label
 
-class Scene(object):
+class Engine(object):
     
     # constructor
     def __init__(self):
@@ -20,7 +21,16 @@ class Scene(object):
         self.background.fill((0, 0, 0))
         self.clock = pygame.time.Clock()
         self.screen.blit(self.background, (0, 0))
-        
+        # setup player score and player lives
+        self.playerScore = 0
+        self.scoreDisplay = Label()
+        self.scoreDisplay.text = str(self.playerScore)
+        self.scoreDisplay.center = (75, 25)
+        self.playerLives = "LIVES: 3"
+        self.livesDisplay = Label()
+        self.livesDisplay.text = self.playerLives
+        self.livesDisplay.center = (600, 25)
+        self.scoreSprites = pygame.sprite.Group(self.scoreDisplay, self.livesDisplay)
         # define player sprites and player sprite groups
         self.laser = Laser()
         self.player = Player()
@@ -48,8 +58,8 @@ class Scene(object):
         self.events()
         self.update()
         self.draw()
-        #self.checkCollide()
-        pygame.display.flip()
+        self.checkCollide()
+        pygame.display.update()
     
     # manages input events
     def events(self):
@@ -72,16 +82,23 @@ class Scene(object):
         self.laserGroup.clear(self.screen, self.background)
         self.enemyGroup.clear(self.screen, self.background)
         self.enemyLaserGroup.clear(self.screen, self.background)
+        self.scoreSprites.clear(self.screen, self.background)
         # update groups
         self.playerGroup.update(self.screen)
         self.laserGroup.update(self.screen)
+        self.scoreSprites.update()
         # check if enemy is dead, and roll chance to spawn if so
         if self.enemy.status == "Dead":
             if random.randrange(0, 100) == 1:
                 self.enemy.spawn()
         else:
-            self.enemyGroup.update(self.screen)
+            self.enemyGroup.update()
             if self.enemyLaser.timer == 0:
+                # create pseudorandom laser fire
+                if self.enemy.y < 400:
+                    self.enemy.laserDirection = random.randint(30, 150)
+                else:
+                    self.enemy.laserDirection = random.randint(210, 330)
                 self.enemyLaser.firing.play()
                 self.enemyLaser.x = self.enemy.x
                 self.enemyLaser.y = self.enemy.y
@@ -96,12 +113,17 @@ class Scene(object):
         self.laserGroup.draw(self.screen)
         self.enemyGroup.draw(self.screen)
         self.enemyLaserGroup.draw(self.screen)
+        self.scoreSprites.draw(self.screen)
         
-    '''# check for sprite collosions
+    # check for sprite collosions
     def checkCollide(self):
         # check if player laser has hit enemy
-        if (pygame.sprite.groupcollide(self.enemyGroup, self.laserGroup, True, False)):
-            self.enemy.killSprite()
-            #self.enemyLaser.reset()
+        if (pygame.sprite.groupcollide(self.enemyGroup, self.laserGroup, False, False)):
+            if self.enemy.direction == 180:
+                self.enemy.x = 1280
+            else:
+                self.enemy.x = -80
+            self.playerScore += 100
+            self.scoreDisplay.text = str(self.playerScore)
         # check if enemy laser has hit player
         #if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):'''

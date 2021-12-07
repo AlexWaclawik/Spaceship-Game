@@ -28,14 +28,3 @@ class EnemyLaser(pygame.sprite.Sprite):
     def move(self):
         self.x += self.laserCharge * math.cos(self.direction * math.pi / 180)
         self.y += self.laserCharge * math.sin(self.direction * math.pi / 180)
-    
-    '''# check if sprite is off screen
-    def checkBounds(self, screen):
-        if self.x > screen.get_width():
-            self.x = 0
-        if self.x < 0:
-            self.x = 0
-        if self.y > screen.get_height():
-            self.y = 0
-        if self.y < 0:
-            self.y = 0'''
