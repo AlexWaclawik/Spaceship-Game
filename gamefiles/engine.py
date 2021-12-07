@@ -15,7 +15,7 @@ class Engine(object):
         pygame.init()
         pygame.mixer.init()
         self.screen = pygame.display.set_mode((1200, 800))
-        pygame.display.set_caption("Modern Asteroids")
+        pygame.display.set_caption("In Game")
         self.background = pygame.Surface(self.screen.get_size())
         self.background = self.background.convert()
         self.background.fill((0, 0, 0))
@@ -26,11 +26,7 @@ class Engine(object):
         self.scoreDisplay = Label()
         self.scoreDisplay.text = str(self.playerScore)
         self.scoreDisplay.center = (75, 25)
-        self.playerLives = "LIVES: 3"
-        self.livesDisplay = Label()
-        self.livesDisplay.text = self.playerLives
-        self.livesDisplay.center = (600, 25)
-        self.scoreSprites = pygame.sprite.Group(self.scoreDisplay, self.livesDisplay)
+        self.scoreSprites = pygame.sprite.Group(self.scoreDisplay)
         # define player sprites and player sprite groups
         self.laser = Laser()
         self.player = Player()
@@ -126,4 +122,8 @@ class Engine(object):
             self.playerScore += 100
             self.scoreDisplay.text = str(self.playerScore)
         # check if enemy laser has hit player
-        #if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):'''
+        if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):
+            self.stop()
+        # check if player has hit enemy
+        if (pygame.sprite.groupcollide(self.playerGroup, self.enemyGroup, True, False)):
+            self.stop()
