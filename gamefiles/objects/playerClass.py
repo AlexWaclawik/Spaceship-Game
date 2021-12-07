@@ -23,9 +23,9 @@ class Player(pygame.sprite.Sprite):
         self.dx = 0
         self.dy = 0
         self.direction = 0
-        self.turnRate = 3
+        self.turnRate = 4
         self.thrust = 0
-        self.charge = 20
+        self.charge = 25
         
     def update(self, screen):
         self.checkKeys()

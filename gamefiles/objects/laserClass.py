@@ -39,8 +39,8 @@ class Laser(pygame.sprite.Sprite):
             self.reset()
             
     def reset(self):
-        self.x = -100
-        self.y = -100
+        self.x = -300
+        self.y = -300
         self.speed = 0
         self.canShoot = True
         

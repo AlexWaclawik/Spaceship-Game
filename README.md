@@ -1,6 +1,6 @@
 ## Spaceship Shoot Em' Up
 
-This game is a 2D arcade shooter inspired by *ASTEROIDS*. You control a multidirectional spaceship 
+This game is a 2D arcade shooter in which you control a multidirectional spaceship 
 and shoot down ongoing waves of enemy UFOs, all while obtaining an ever-increasing score.
 
 <p align="right"></p>
@@ -14,6 +14,12 @@ Dependancies:
 <p align="right"></p>
 
 ### Usage
+
+<p align="right"></p>
+
+### Design
+
+The design of this game falls into several components:
 
 <p align="right"></p>
 

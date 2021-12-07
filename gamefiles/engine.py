@@ -4,7 +4,7 @@ import random
 from gamefiles.objects.playerClass import Player
 from gamefiles.objects.laserClass import Laser
 from gamefiles.objects.enemyClass import Enemy
-#from gameFiles.objects.enemyLaserClass import EnemyLaser
+#from gamefiles.objects.enemyClass import EnemyLaser
 
 class Scene(object):
     
@@ -20,14 +20,13 @@ class Scene(object):
         self.background.fill((0, 0, 0))
         self.clock = pygame.time.Clock()
         self.screen.blit(self.background, (0, 0))
-        
         # define player sprites and player sprite groups
         self.laser = Laser()
         self.player = Player()
         self.playerGroup = pygame.sprite.Group(self.player)
         self.laserGroup = pygame.sprite.Group(self.laser)
         # define enemy sprites and enemy sprite groups
-        #self.enemyLaser = EnemyLaser()
+        self.enemyLaser = EnemyLaser()
         self.enemy = Enemy()
         self.enemyGroup = pygame.sprite.Group(self.enemy)
         #self.enemyLaserGroup = pygame.sprite.Group(self.enemyLaser)
@@ -48,6 +47,7 @@ class Scene(object):
         self.events()
         self.update()
         self.draw()
+        self.checkCollide()
         pygame.display.flip()
     
     # manages input events
@@ -66,21 +66,33 @@ class Scene(object):
             
     # updates objects
     def update(self):
-        # check if enemy is dead, and roll chance to spawn if so
-        if self.enemy.status == "Dead":
-            if random.randrange(0, 100) == 1:
-                self.enemy.spawn()
-                #self.enemyLaser.canShoot = True
         # clear groups
         self.playerGroup.clear(self.screen, self.background)
         self.laserGroup.clear(self.screen, self.background)
         self.enemyGroup.clear(self.screen, self.background)
-        #self.enemyLaserGroup.clear(self.screen, self.background)
+        self.enemyLaserGroup.clear(self.screen, self.background)
         # update groups
         self.playerGroup.update(self.screen)
         self.laserGroup.update(self.screen)
-        self.enemyGroup.update(self.screen)
-        #self.enemyLaserGroup.update(self.screen)
+        # check if enemy is dead, and roll chance to spawn if so
+        if self.enemy.status == "Dead":
+            if random.randrange(0, 300) == 1:
+                self.enemy.spawn()
+        else:
+            self.enemyGroup.update(self.screen)
+            if 
+            #self.enemy.fireLaser(self.enemyLaser)
+            #self.enemyLaser.canShoot = False
+            #self.enemyLaserGroup.update(self.screen)
+    # fire enemy laser
+    '''def fireLaser(self):
+        # fire laser once per frame
+        if self.laserTimer == 0:
+            self.lasers.append(EnemyLaser(self.x, self.y, self.laserDirection))
+            self.laserTimer = 60
+        # otherwise count down laser timer by one
+        else:
+            self.laserTimer -= 1'''
     
     # draws screen
     def draw(self):
@@ -88,3 +100,12 @@ class Scene(object):
         self.laserGroup.draw(self.screen)
         self.enemyGroup.draw(self.screen)
         #self.enemyLaserGroup.draw(self.screen)
+        
+    # check for sprite collosions
+    def checkCollide(self):
+        # check if player laser has hit enemy
+        if (pygame.sprite.groupcollide(self.enemyGroup, self.laserGroup, True, False)):
+            self.enemy.killSprite()
+            #self.enemyLaser.reset()
+        # check if enemy laser has hit player
+        #if (pygame.sprite.groupcollide(self.playerGroup, self.enemyLaserGroup, True, False)):
