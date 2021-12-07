@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.imageLeft = self.imageLeft.convert()
         self.imageRight = pygame.image.load("assets/sprites/ships/ship-1/ship-right.png")
         self.imageRight = self.imageRight.convert()
-        self.soundFiring = pygame.mixer.Sound("assets/sounds/effects/laser.mp3")
+        self.soundFiring = pygame.mixer.Sound("assets/sounds/effects/player-gun.flac")
         self.soundFiring.set_volume(0.1)
         self.imageMaster = self.imageCruise
         self.image = self.imageMaster

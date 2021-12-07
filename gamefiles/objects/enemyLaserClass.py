@@ -5,7 +5,7 @@ import math
 class EnemyLaser(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.firing = pygame.mixer.Sound("assets/sounds/effects/enemy-laser-1.ogg")
+        self.firing = pygame.mixer.Sound("assets/sounds/effects/enemy-laser.mp3")
         self.firing.set_volume(0.1)
         self.image = pygame.image.load("assets/sprites/lasers/red-laser.png")
         self.image = self.image.convert()
