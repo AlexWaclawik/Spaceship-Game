@@ -10,7 +10,7 @@ from gamefiles.utilities.label import Label
 class Engine(object):
     
     # constructor
-    def __init__(self):
+    def __init__(self, difficulty):
         # initialize pygame and display
         pygame.init()
         pygame.mixer.init()
@@ -33,7 +33,7 @@ class Engine(object):
         self.playerGroup = pygame.sprite.Group(self.player)
         self.laserGroup = pygame.sprite.Group(self.laser)
         # define enemy sprites and enemy sprite groups
-        self.enemyLaser = EnemyLaser()
+        self.enemyLaser = EnemyLaser(difficulty)
         self.enemy = Enemy()
         self.enemyGroup = pygame.sprite.Group(self.enemy)
         self.enemyLaserGroup = pygame.sprite.Group(self.enemyLaser)

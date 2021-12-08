@@ -3,7 +3,7 @@ import math
 
 # enemy laser class
 class EnemyLaser(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, difficulty):
         pygame.sprite.Sprite.__init__(self)
         self.firing = pygame.mixer.Sound("assets/sounds/effects/enemy-laser.mp3")
         self.firing.set_volume(0.1)
@@ -13,7 +13,7 @@ class EnemyLaser(pygame.sprite.Sprite):
         self.x = 0
         self.y = 0
         self.direction = 0
-        self.laserCharge = 10
+        self.laserCharge = 10 * difficulty
         self.timer = 60
     
     # update sprite

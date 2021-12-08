@@ -41,7 +41,7 @@ Individual Credits:
 1. [Spaceship Sprite](https://opengameart.org/content/spaceship-9)
 2. [UFO Sprite](https://opengameart.org/content/gunship)
 3. [Explosion Sprites](https://opengameart.org/content/bubble-explosion)
-4. [Splash Screen Font](https://www.fontspace.com/mobile-infantry-font-f33133)
+4. [Backgrounds](https://www.nasa.gov/mission_pages/hubble/multimedia/index.html)
 5. [Laser Sprites](https://opengameart.org/content/lasers-and-beams)
 6. [Player Gun](https://opengameart.org/content/synthesized-explosion)
 7. [Enemy Laser](https://opengameart.org/content/laser-fire-0)

@@ -1,17 +1,12 @@
 import pygame
-from gamefiles.utilities.label import Label
 
 class Menu(object):
     def __init__(self):
         pygame.init()
-        pygame.mixer.init()
         self.screen = pygame.display.set_mode((1200, 800))
-        pygame.display.set_caption("Main Menu")
-        self.background = pygame.image.load("assets/background/menu.jpg")
+        pygame.display.set_caption("Splash Screen")
+        self.background = pygame.image.load("assets/background/splashscreen.png")
         self.background = self.background.convert()
-        self.theme = pygame.mixer.Sound("assets/sounds/soundtrack/menutheme.mp3")
-        self.theme.set_volume(0.5)
-        self.theme.play(loops=-1)
         self.clock = pygame.time.Clock()
         self.screen.blit(self.background, (0, 0))
 
@@ -20,10 +15,6 @@ class Menu(object):
         self.keepGoing = True
         while self.keepGoing:
             self.mainLoop()
-            
-    # stops the main loop
-    def stop(self):
-        self.keepGoing = False
         
     # manages all the main events
     def mainLoop(self):
@@ -39,5 +30,4 @@ class Menu(object):
                     pygame.quit()
                     sys.exit()
                 else:
-                    self.theme.stop()
                     self.keepGoing = False

@@ -14,7 +14,7 @@ class Enemy(pygame.sprite.Sprite):
         self.direction = 0
         self.laserDirection = 0
         self.thrust = 4
-        self.charge = 10
+        #self.charge = 10
         self.status = "Dead"
     
     # update sprite
