@@ -21,7 +21,7 @@ timings, and everything else during gameplay. There are four sub-components: the
 These components are broken up into their own classes, each with it's own specific functionality.
 
 **Player Ship**
-- The player ship is based off one of the class demos, with some modifications. It can thrust forwards, 
+- The player ship exhibits several modes of control. It can thrust forwards, 
 as well as yaw left and right. Each movement input has it's own sprite, so it creates a pleasent animation. 
 The ship controls are surprisingly intuitive, and actually have a bit of a skill curve to them.
 
