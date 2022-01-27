@@ -47,10 +47,6 @@ Not wanting to fix something that isn't broken, I kept the player laser and enem
 - The engine acts as the controller of the entire game. It initializes the classes, controls the main loop, displays and updates the 
 score, checks for sprite collosion, and overall manages most of the game logic.
 
-**State Transition Diagram**
-
-![statetransition.py](https://i.imgur.com/HzbVXbP.png)
-
 <p align="right"></p>
 
 ### Credits
