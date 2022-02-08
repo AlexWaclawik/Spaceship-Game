@@ -2,7 +2,7 @@
 ![header](https://i.imgur.com/lBXmJy6.png)
 
 This game is a 2D arcade shooter in which you control a multidirectional spaceship and shoot enemy UFOs, 
-all while obtaining an ever-increasing score. It has been madein *Python*, using the *Pygame* library.
+all while obtaining an ever-increasing score. It has been made in *Python*, using the *Pygame* library.
 
 <p align="right"></p>
 
